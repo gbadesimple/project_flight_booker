@@ -1,0 +1,15 @@
+<h1> Search flights </h1>
+
+<%  @flights.each do |flight| %>
+<strong> From: </strong>
+  <%= flight.from_airport.name %><br />
+
+<strong> To: </strong>
+  <%= flight.to_airport.name %>
+<% end %>
+
+<%= simple_form_for :search, url: root_path, method: "GET" do |f| %>
+<%= f.label :to_airport %>
+<%= f.select(:to_airport, options_for_select(:to_airport, :name) )
+<%= f.submit :search %>
+<% end %>
