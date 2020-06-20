@@ -1,7 +1,22 @@
 class FlightsController < ApplicationController
   def index
-    @flights = Flight.all
-  end
+    @airports = Airport.all.map { |airport| [airport.name, airport.id] }
+    @flight_dates = Flight.order(:departure => "ASC").map { |date| [date.departure.to_formatted_s(:long_ordinal), date.id]}
 
+    @flights = Flight.all
+
+    if params[:search]
+      start_id = params[:search][:start_id]
+      finish_id = params[:search][:finish_id]
+      passenger = params[:search][:passenger]
+      date = params[:search][:departure]
+
+      @flights = Flight.order(:departure).where("start_id = ?", start_id) if start_id.present?
+      @flights = Flight.order(:deapture).where("finish_id = ?", finish_id) if finish_id.present?
+      @flights = Flight.order(:departure).where("start_id = ? AND finish_id = ?", start_id, finish_id) if start_id.present? && finish_id.present?
+      @flights = Flight.order(:departure).where("departure = ?", date) if date.present?
+    end
+
+  end
 
 end
