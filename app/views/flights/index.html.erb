@@ -1,37 +1,45 @@
 <h1> Search flights </h1>
 
+
 <div>
-  <% if @flights.empty? %>
-  <h3> No flight found for your search. </h3>
+  <%= simple_form_for :search, url: root_path, method: "GET", local: true do |f| %>
+    <%= f.input :start_id, :collection => (@airports), wrapper: false %>
+    <%= f.input :finish_id, :collection => (@airports) %>
+    <%= f.input :departure, :collection => ( @flight_dates ), prompt: "Flight date", hint: "Leave as default if you don't know." %>
+    <%= f.input :passenger, :collection => ( [ ['1', 1], ['2', 2], ['3', 3], ['4', 4] ]), selected: "1" %>
+    <%= f.submit "Search" %>
   <% end %>
-</div>
-
+</div><br />
 
 <div>
-    <% @flights.each do |flight| %>
-    <table border="2">
-      <tr>
-        <th>From</th>
-        <th>To</th>
-        <th>Date</th>
-        <th>Duration</th>
-      </tr>
-      <tr>
-        <td><%= flight.from_airport.name %></td>
-        <td><%= flight.to_airport.name %></td>
-        <td><%= flight.departure.to_formatted_s(:long_ordinal) %></td>
-        <td><%= flight.duration %></td>
-      </tr>
-    </table>
+  <% if params[:search] %>
+    <% if @results.empty? %>
+      <h3> No flight found for your search criteria. </h3>
+    <% else %>
+      <%= simple_form_for :bookflight, url: new_booking_path, method: :GET do |form| %>
+        <% @results.each do |flight| %>
+          <table border="">
+            <tr>
+              <th></th>
+              <th>From</th>
+              <th>To</th>
+              <th>Departure Date</th>
+              <th>Duration</th>
+            </tr>
+            <tr>
+
+              <th><%= form.radio_button :flight_id, flight.id  %></th>
+
+              <td><%= flight.from_airport.name %></td>
+              <td><%= flight.to_airport.name %></td>
+              <td><%= flight.departure.to_formatted_s(:long_ordinal) %></td>
+              <td><%= flight.duration %></td>
+            </tr>
+          </table>
+        <% end %>
+        <%= form.input :passenger, as: :hidden, value: {:passenger => "passenger"} %>
+        <%= form.submit "Book flight" %>
+      <% end %>
+    <% end %>
   <% end %>
-</div> <br />
-
-<div>
-<%= simple_form_for :search, url: root_path, method: "GET", local: true do |f| %>
-<%= f.input :start_id, :collection => (@airports), prompt: "From" %>
-<%= f.input :finish_id, :collection => (@airports), prompt: "To" %>
-<%= f.input :departure, :collection => ( @flight_dates ), prompt: "Flight date", hint: "Leave as default if you don't know." %>
-<%= f.input :num_tickets, label: "Passenger", :collection => ( [ ['1', 1], ['2', 2], ['3', 3], ['4', 4] ]), promt: "Choose number of passenger(s)" %>
-<%= f.submit "Search" %>
-<% end %>
 </div>
