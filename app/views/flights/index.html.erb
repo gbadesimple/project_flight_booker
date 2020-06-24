@@ -3,10 +3,10 @@
 
 <div>
   <%= simple_form_for :search, url: root_path, method: "GET", local: true do |f| %>
-    <%= f.input :start_id, :collection => (@airports), wrapper: false %>
-    <%= f.input :finish_id, :collection => (@airports) %>
-    <%= f.input :departure, :collection => ( @flight_dates ), prompt: "Flight date", hint: "Leave as default if you don't know." %>
-    <%= f.input :passenger, :collection => ( [ ['1', 1], ['2', 2], ['3', 3], ['4', 4] ]), selected: "1" %>
+    <%= f.input :start_id, label: "From", :collection => (@airports), wrapper: false %>
+    <%= f.input :finish_id, label: "To", :collection => (@airports) %>
+    <%= f.input :departure, :collection => ( @flight_dates ), prompt: "Available flight date", hint: "Leave as default if you don't know date to choose." %>
+    <%= f.input :passenger, :collection => ( @passengers), selected: '2' %>
     <%= f.submit "Search" %>
   <% end %>
 </div><br />
@@ -16,11 +16,15 @@
     <% if @results.empty? %>
       <h3> No flight found for your search criteria. </h3>
     <% else %>
-      <%= simple_form_for :bookflight, url: new_booking_path, method: :GET do |form| %>
+      <%= simple_form_for :booking, url: new_booking_path, method: :GET do |form| %>
+      <%= form.hidden_field :passenger, :value => (params[:search][:passenger])  %>
+      <%= form.hidden_field :num_tickets, :value => (params[:search][:passenger]) %>
+
+      <h3> Available flights </h3>
         <% @results.each do |flight| %>
           <table border="">
             <tr>
-              <th></th>
+              <th>Choose this flight</th>
               <th>From</th>
               <th>To</th>
               <th>Departure Date</th>
@@ -34,10 +38,9 @@
               <td><%= flight.to_airport.name %></td>
               <td><%= flight.departure.to_formatted_s(:long_ordinal) %></td>
               <td><%= flight.duration %></td>
-            </tr>
+            </tr><br />
           </table>
         <% end %>
-        <%= form.input :passenger, as: :hidden, value: {:passenger => "passenger"} %>
         <%= form.submit "Book flight" %>
       <% end %>
     <% end %>

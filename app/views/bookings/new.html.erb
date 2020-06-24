@@ -1,0 +1,29 @@
+<h1> Booking </h1>
+
+<div>
+
+ <div>
+   <table>
+     <tr>
+       <th>Flight ID</th>
+       <th>From Airport </th>
+       <th>Destination</th>
+       <th>Departure Date</th>
+     </tr>
+     <tr>
+       <td><%= @flight.id  %></td>
+       <td><%= @flight.from_airport.name %></td>
+       <td><%= @flight.to_airport.name %></td>
+       <td><%= @flight.departure.to_formatted_s(:long_ordinal) %></td>
+    </tr>
+   </table>
+  </div><br />
+
+  <%= simple_form_for @booking, method: "POST" do |f| %>
+    <%= f.fields_for :passengers do |passenger_form| %>
+      <%= passenger_form.input :name, placeholder: "Passenger name" %>
+      <%= passenger_form.input :email, placeholder: "Passenger active email please" %>
+    <% end %>
+    <%= f.submit :submit %>
+  <% end %>
+</div>
