@@ -1,13 +1,15 @@
-<h1> Search flights </h1>
+<div class="div">
+
+<h1 class="title is-4"> Search flights </h1>
 
 
 <div>
   <%= simple_form_for :search, url: root_path, method: "GET", local: true do |f| %>
     <%= f.input :start_id, label: "From", :collection => (@airports), wrapper: false %>
-    <%= f.input :finish_id, label: "To", :collection => (@airports) %>
-    <%= f.input :departure, :collection => ( @flight_dates ), prompt: "Available flight date", hint: "Leave as default if you don't know date to choose." %>
-    <%= f.input :passenger, :collection => ( @passengers), selected: '2' %>
-    <%= f.submit "Search" %>
+    <%= f.input :finish_id, label: "To", :collection => (@airports), wrapper: false %>
+    <%= f.input :departure, :collection => ( @flight_dates ), wrapper: false, prompt: "Available flight date", hint: "Leave as default", label_html: {class:"label"} %>
+    <%= f.input :passenger, :collection => ( @passengers), selected: '2', wrapper:false %>
+    <%= f.submit "Search", class:"button is-info" %>
   <% end %>
 </div><br />
 
@@ -32,7 +34,7 @@
             </tr>
             <tr>
 
-              <th><%= form.radio_button :flight_id, flight.id  %></th>
+              <td><%= form.radio_button :flight_id, flight.id  %></td>
 
               <td><%= flight.from_airport.name %></td>
               <td><%= flight.to_airport.name %></td>
@@ -41,8 +43,10 @@
             </tr><br />
           </table>
         <% end %>
-        <%= form.submit "Book flight" %>
+        <%= form.submit "Book flight", class:"button is-dark" %>
       <% end %>
     <% end %>
   <% end %>
+</div>
+
 </div>

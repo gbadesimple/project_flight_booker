@@ -1,1 +1,39 @@
+<div >
 <h1>Booking Details</h1>
+
+<div>
+  <table border="2">
+    <tr>
+      <th>Flight Number</th>
+      <th>From Airport</th>
+      <th>Destination Airport</th>
+      <th>Departure date</th>
+      <th>Duration of flight</th>
+    </tr>
+    <tr>
+      <td><%= @flight.id %></td>
+      <td><%= @flight.from_airport.name %> </td>
+      <td><%= @flight.to_airport.name %> </td>
+      <td><%= @flight.departure.to_formatted_s(:long_ordinal) %> </td>
+      <td><%= @flight.duration %> </td>
+    </tr>
+  </table>
+</div>
+
+<div>
+  <h2> Passenger </h2>
+    <ul>
+      <% @booking.passengers.each do |detail| %>
+        <li>
+          <strong>Name:</strong>
+            <%= detail.name %><br />
+          <strong>Email:</strong>
+            <%= detail.email %>
+        </li><hr>
+      <% end %>
+    </ul>
+</div><br />
+
+<%= link_to "Homepage", root_path, class:"button is-primary" %>
+
+</div>

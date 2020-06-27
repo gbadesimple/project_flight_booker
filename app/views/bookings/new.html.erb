@@ -1,20 +1,19 @@
-<h1> Booking </h1>
+<div >
 
-<div>
-
+  <h1 class="title is-4"> Booking </h1>
  <div>
    <h3>Your flight information</h3>
    <fieldset>
-     <legend>Flight Details </legend>
+     <legend>Flight Details</legend>
    <table>
      <tr>
-       <th>Flight ID</th>
-       <th>From Airport </th>
+       <th>Flight </th>
+       <th>From </th>
        <th>Destination</th>
        <th>Departure Date</th>
      </tr>
      <tr>
-       <td><%= @flight.id  %></td>
+       <td>#<%= @flight.id  %></td>
        <td><%= @flight.from_airport.name %></td>
        <td><%= @flight.to_airport.name %></td>
        <td><%= @flight.departure.to_formatted_s(:long_ordinal) %></td>
@@ -27,7 +26,7 @@
   <h3>Add passenger information</h3>
   <div>
   <%= simple_form_for @bookings, method: "POST" do |f| %>
-  <fieldset>
+  <fieldset class="div">
     <legend> Enter passenger information </legend>
   <ul>
     <%= f.simple_fields_for :passengers do |form| %>

@@ -3,7 +3,7 @@ class Booking < ApplicationRecord
   has_many :passengers
 
   accepts_nested_attributes_for :passengers
-  #validates_associated :passengers
+
 
   def associated_passengers(passengers_attributes)
     passengers_attributes.each do |key, value|
