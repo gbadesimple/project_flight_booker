@@ -1,28 +1,37 @@
 class BookingsController < ApplicationController
+
   def new
     @flight = Flight.find_by_id(booking_params[:flight_id].to_i)
     @flight_id = booking_params[:flight_id]
-    @booking = @flight.bookings.new(flight_id: @flight_id)
+    @bookings = @flight.bookings.new(flight_id: @flight_id)
 
-    booking_params[:passengers].to_i.times { @booking.passengers.build }
-    #@booking = Booking.new(flight_id: params[:booking][:flight_id])
+    booking_params[:passenger].to_i.times {@bookings.passengers.build}
   end
 
   def create
     @flight = Flight.find_by_id(booking_params[:flight_id].to_i)
-    @booking = @flight.bookings.new(flight_id: @flight_id)
+    @booking = @flight.bookings.create(flight_id: @flight_id)
+
+    @booking.associated_passengers(booking_params[:passengers_attributes])
 
     if @booking.save
-      flash[:notice] = "Your record was succefully created."
-      redirect_to root_path
+      flash[:notice] = "Booking succesfull"
+      render :show
     else
-      flash[:alert] = "Your record was not successfull, please try again!"
+      flash[:alert] = "Booking unsuccessful"
       render :new
     end
   end
 
+  def show
+    @booking = Booking.find(params[:id])
+  end
+
+
   private
   def booking_params
-    params.require(:booking).permit(:flight_id, :num_tickets, :passenger)
+    params.require(:booking).permit(:flight_id, :num_tickets,
+                                    :passenger,
+                                    :passengers_attributes => [:name, :email])
   end
 end

@@ -3,6 +3,9 @@
 <div>
 
  <div>
+   <h3>Your flight information</h3>
+   <fieldset>
+     <legend>Flight Details </legend>
    <table>
      <tr>
        <th>Flight ID</th>
@@ -17,13 +20,28 @@
        <td><%= @flight.departure.to_formatted_s(:long_ordinal) %></td>
     </tr>
    </table>
+   </fieldset>
   </div><br />
 
-  <%= simple_form_for @booking, method: "POST" do |f| %>
-    <%= f.fields_for :passengers do |passenger_form| %>
-      <%= passenger_form.input :name, placeholder: "Passenger name" %>
-      <%= passenger_form.input :email, placeholder: "Passenger active email please" %>
+
+  <h3>Add passenger information</h3>
+  <div>
+  <%= simple_form_for @bookings, method: "POST" do |f| %>
+  <fieldset>
+    <legend> Enter passenger information </legend>
+  <ul>
+    <%= f.simple_fields_for :passengers do |form| %>
+    <li>
+      <%= form.input :name, placeholder: "name" %>
+      <%= form.input :email, placeholder: "Passenger active email please" %>
+    </li>
     <% end %>
-    <%= f.submit :submit %>
+    </ul>
+
+    <%= f.hidden_field :flight_id, value: @flight_id %>
+    <%= f.submit "Add passenger" %>
   <% end %>
+  </fieldset>
+  </div>
+
 </div>
