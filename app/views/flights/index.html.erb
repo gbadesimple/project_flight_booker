@@ -27,8 +27,12 @@
           <table border="">
             <tr>
               <th>Choose this flight</th>
-              <th>From</th>
-              <th>To</th>
+              <th>From (Code)</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>To (Code)</th>
+              <th>Name</th>
+              <th>Location</th>
               <th>Departure Date</th>
               <th>Duration</th>
             </tr>
@@ -37,7 +41,13 @@
               <td><%= form.radio_button :flight_id, flight.id  %></td>
 
               <td><%= flight.from_airport.name %></td>
+              <td><%= flight.from_airport.airport_name %></td>
+              <td><%= flight.from_airport.location %></td>
+
               <td><%= flight.to_airport.name %></td>
+              <td><%= flight.to_airport.airport_name %></td>
+              <td><%= flight.to_airport.location %></td>
+
               <td><%= flight.departure.to_formatted_s(:long_ordinal) %></td>
               <td><%= flight.duration %></td>
             </tr><br />

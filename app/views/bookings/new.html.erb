@@ -5,17 +5,29 @@
    <h3>Your flight information</h3>
    <fieldset>
      <legend>Flight Details</legend>
-   <table>
+   <table border="2">
      <tr>
        <th>Flight </th>
        <th>From </th>
+       <th>Airport</th>
+       <th>Location</th>
+
        <th>Destination</th>
+       <th>Airport</th>
+       <th>Location</th>
+
        <th>Departure Date</th>
      </tr>
      <tr>
        <td>#<%= @flight.id  %></td>
        <td><%= @flight.from_airport.name %></td>
+       <td><%= @flight.from_airport.airport_name %></td>
+       <td><%= @flight.from_airport.location %></td>
+
        <td><%= @flight.to_airport.name %></td>
+       <td><%= @flight.to_airport.airport_name %></td>
+       <td><%= @flight.to_airport.location %></td>
+
        <td><%= @flight.departure.to_formatted_s(:long_ordinal) %></td>
     </tr>
    </table>
