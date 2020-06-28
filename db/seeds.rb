@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-=begin
+
 Airport.destroy_all
 
 Airport.create(name: "SFO", airport_name: "San Francisco International Airport", location: "San Francisco City")
@@ -23,7 +23,7 @@ Airport.create(name: "SKO", airport_name: "Sadiq Abubakar III International Airp
 Airport.create(name: "CBQ", airport_name: "Margaret Ekpo International Airport", location: "Calabar")
 Airport.create(name: "KAN", airport_name: "Mallam Aminu International Airport", location: "Kano")
 Airport.create(name: "ABB", airport_name: "Asaba International Airport", location: "Asaba")
-=end
+
 
 
 
