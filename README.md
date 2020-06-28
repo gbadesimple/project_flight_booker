@@ -13,3 +13,6 @@ This project require you seed your database, so I used my db/seeds.rb file
 to write the code necessary to populate Airports and Flights.
 
 Check the curriculum task on [TheOdinProject](https://www.theodinproject.com/lessons/building-advanced-forms).
+
+## Hardcode database
+Fork this repo and run `rails db:migrate` not forgetting `rails db:seed` migration.
