@@ -14,5 +14,13 @@ to write the code necessary to populate Airports and Flights.
 
 Check the curriculum task on [TheOdinProject](https://www.theodinproject.com/lessons/building-advanced-forms).
 
-## Hardcode database
+## Database
 Fork this repo and run `rails db:migrate` not forgetting `rails db:seed` migration.
+
+# Sending Welcome Emails
+
+Setting up a mailer is a relatively straightforward task. It’s very similar to building a new controller and views.
+
+This part of the project sends out a “You have booked your ticket” email to all Passengers when they are created as part of the booking process.
+
+Check this task on [TheOdinProject](https://www.theodinproject.com/lessons/sending-confirmation-emails).
