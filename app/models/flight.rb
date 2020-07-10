@@ -5,5 +5,5 @@ class Flight < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :passengers, :through => "bookings"
 
-  validates :passenger, presence: true
+  #validates :passenger, presence: true
 end
