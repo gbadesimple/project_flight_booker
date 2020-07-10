@@ -30,6 +30,8 @@ gem "bulma-rails", "~> 0.9.0"
 
 # preview gem
 gem "letter_opener", :group => :development
+# environment variable
+gem "figaro"
 
 
 # Reduces boot times through caching; required in config/boot.rb

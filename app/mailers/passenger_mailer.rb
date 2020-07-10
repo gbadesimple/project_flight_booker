@@ -2,6 +2,7 @@ class PassengerMailer < ApplicationMailer
 
   def thank_you_mail(passengers)
     @passengers = passengers
+    @url = 'https//codetechinc.com'
     @messages = "Thank you"
     @mails = "Thank you for your continued patronage with OdinFlight."
 
