@@ -15,7 +15,9 @@ class BookingsController < ApplicationController
     @booking.associated_passengers(booking_params[:passengers_attributes])
 
     if @booking.save
-      flash[:notice] = "Booking succesfull"
+      # do this if .save
+      PassengerMailer.thank_you_mail(@booking.passengers).deliver_now
+      flash[:notice] = "Booking succesfull and notice sent to the email you provided!"
       render :show
     else
       flash[:alert] = "Booking unsuccessful"

@@ -28,6 +28,10 @@ gem "bulma-rails", "~> 0.9.0"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# preview gem
+gem "letter_opener", :group => :development
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
