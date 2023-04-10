@@ -1,6 +1,6 @@
 class FlightsController < ApplicationController
   def index
-    @airports = Airport.all.map { airport| [airport.name, airport.id] }
+    @airports = Airport.all.map { |airport| [airport.name, airport.id] }
     @flight_dates = Flight.order(:departure => "ASC").map { |date| [date.departure.to_formatted_s(:long_ordinal), date.id] }
     @passengers = [ ['1',1],['2',2],['3',3],['4',4] ]
     #@num_tickets = 1..4
